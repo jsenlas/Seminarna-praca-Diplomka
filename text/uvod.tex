@@ -1,0 +1,50 @@
+\chapter*{Introduction}
+\phantomsection
+\addcontentsline{toc}{chapter}{Introduction}
+
+This work explains the topic of \acs{das} (\acl{das}), which uses optical fiber as a sensor array. Light pulses are sent from the light source through the fiber. The light is reflected and scattered on imperfections in the fiber and is reflected back to the light source where its properties are measured like changes in frequency and phase. If there is a strain on the fiber or the fiber is subjected to vibrations of any type, it is possible to interpret them as an audio signal or as some kind of movement. DAS is used for applications such as perimeter monitoring, earthquake detection and localization, traffic monitoring and incident detection and many more. One of the uses is possibility to hear interpret the data as a audio signal and use it as a microphone, which makes optical fiber a big security vulnerability. Especially dangerous is the fact that the attackers do not need access to the server room or the devices themselves, but can connect to the fiber anywhere. There is also the issue of detecting these kinds of attacks because DAS has no impact on existing communication on the fiber.
+
+The main goal of this work is to implement an application that takes the data in HDF5 file format and converts it to WAV audio file format. The second goal is to design an application for displaying the data in an waterfall graph. The design includes study of existing technology and the study of technology capable of displaying the data in real time.
+
+
+The first chapter explains how the DAS system works, methods of measuring the strain on the fiber. Important part is also study of the HDF5 file format and specially the output of the DAS system. The second chapter explains the implementation of HDF5 to WAV converter. Mainly the contents of the DAS output file and the data processing involved. The last chapter covers the software design of the waterfall graph visualization, all the requirements and the final solution.
+
+
+
+
+
+% the capabilities it has in terms of security risks. 
+% The goal of this 
+
+
+
+
+
+% Úvod studentské práce, např\,\dots
+
+% Nečíslovaná kapitola Úvod obsahuje \uv{seznámení} čtenáře s~problematikou práce.
+% Typicky se zde uvádí:
+% (a) do jaké tematické oblasti práce spadá, (b) co jsou hlavní cíle celé práce a (c) jakým způsobem jich bylo dosaženo.
+% Úvod zpravidla nepřesahuje jednu stranu.
+% Poslední odstavec Úvodu standardně představuje základní strukturu celého dokumentu.
+
+% Tato práce se věnuje oblasti \acs{DSP} (\acl{DSP}), zejména jevům, které nastanou při nedodržení Nyquistovy podmínky pro \ac{symfvz}.%
+% \footnote{Tato věta je pouze ukázkou použití příkazů pro sazbu zkratek.}
+
+% Šablona je nastavena na \emph{dvoustranný tisk}.
+% Nebuďte překvapeni, že ve vzniklém PDF jsou volné stránky.
+% Je to proto, aby důležité stránky jako např.\ začátky kapitol začínaly po vytisknutí a svázání vždy na pravé straně.
+% %
+% Pokud máte nějaký závažný důvod sázet (a~zejména tisknout) jednostranně, nezapomeňte si přepnout volbu \texttt{twoside} na \texttt{oneside}!
+
+% \begin{acronym}[DSP]
+% \acro{DSP}% název je shodný se zkráceným tvarem
+% {číslicové zpracování signálů}
+% \acro{fvz}% název a zkrácený tvar jsou odlišné
+% [\ensuremath{\var{f}_{\const{vz}}}]%
+% 8
+% {vzorkovací kmitočet}
+% \acro{symDFT}%
+% [\ensuremath{\mathcal{F}\left\{.\right\}}]%
+% {provedení diskrétní Fourierovy transformace}
+% \end{acronym}

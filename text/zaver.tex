@@ -1,0 +1,48 @@
+\chapter*{Conclusion}
+\phantomsection
+\addcontentsline{toc}{chapter}{Conclusion}
+
+The main goal of this work was to study the DAS system and its output files int he HDF5 file format. As for the implementation part the goal was to create an application capable of converting the data into an audio file. Last goal was to discuss the possibilities of creating a real-time application for data analysis. 
+
+In the theoretical part the principles of optical reflectometry were explained as well as different types of light scattering in the optical wire. The inner workings of the DAS system and methods like \ac{generalotdr} and \ac{otdr} were also studied. The output file format HDF5 was carefully examined with its objects such as Datasets, Groups, Attributes and Links. The output file structure of the DAS system OptaSense ODH-F was shown in a readable form form. 
+
+An application was created in Python programming language. The application reads the HDF5 data using the h5py Python library. The data was then processed in a few steps - the data was interpolated into the right range, resampled and retyped for the write function from the SciPy library. 
+
+In the last section the software design of a real-time application for the DAS system was discussed. The existing technology was studied with available software for front-end and server side. Real-time capabilities were also discussed with the data bandwidth requirements. A prototype was created written in Svelte to showcase the design of the application with waterfall graph and HTML elements to set properties for display. 
+
+This work can be used as basis for later use as a resource for creating an application for data visualization in the browser. The next step is to create fully functional web application - with its server-side written in Python sending data using WebSockets to the front-end client application written in Svelte.
+
+
+
+
+% \section{}
+
+% The semestral part of the thesis studies DAS principles
+
+% and the output format of the deployed system, 
+
+% \section{Implementation}
+
+% followed by an implementation of conversion from data to audio signal (in WAV format). 
+
+% \subsection{Real-time possibilities}
+
+% This part also investigates the possibilities of real-time data analysis
+
+
+
+% Práce je zaměřena na analýzu dat z optického distribuovaného akustického senzorického (DAS) systému ve formátu HDF5. V semestrální práci student prostuduje princip DAS systém a~jeho výstupy (HDF5 archivy) s detailním popisem formátu HDF5. Následně navrhne program pro převod dat do akustické podoby (WAV) a~popíše možnosti realizace programu v reálném čase. V diplomové práci bude navrženo grafické rozhraní zobrazující data v čase s možnostmi úprav os grafu. Výsledek bude otestován s reálným DAS systémem a~fakultním optickým senzorickým polygonem.
+
+
+
+
+% Info o systeme co pouzivaju v tyme
+% 	HW info
+% 	outputformat - popisat atributy, kanaly, a~celkovo ako to uklada to toho hdf5ky
+
+
+
+
+% Obsah:
+% ako to funguje
+% existujuci HW
