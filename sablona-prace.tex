@@ -161,15 +161,15 @@
 %	{\sffamily\Huge\centering ZDE VLOŽIT LIST ZADÁNÍ}%
 %	{\sffamily\centering Z~důvodu správného číslování stránek}
 %%
-\oddpage% při dvojstranném tisku se přidá prázdná stránka
+% \oddpage% při dvojstranném tisku se přidá prázdná stránka
 
 %% Vysázení stránky s abstraktem
-% \makeabstract
+\makeabstract
 
 % Vysázení stránky s rozšířeným abstraktem
 % (pokud píšete práci v češtině či slovenštině, vložení rozšířeného abstraktu zrušte;
 %  pro semestrální projekt také není potřeba rozšířený abstrakt uvádět)
-% \input{text/rozsireny_abstrakt}
+\input{text/rozsireny_abstrakt}
 
 %%% Vysázení citace práce
 \makecitation
@@ -206,11 +206,12 @@
 
 %%% Vložení souboru 'text/reseni' s popisem řešení práce
 % (rozdělte na více souborů či kapitol, pokud je vhodné)
-\include{text/reseni}
+\include{text/teorie}
 
+\include{text/design}
 %%% Vložení souboru 'text/vysledky' s popisem vysledků práce
 % (rozdělte na více souborů či kapitol, pokud je vhodné)
-% \include{text/vysledky}
+\include{text/implementace}
 
 %%% Vložení souboru 'text/zaver' se závěrem
 \include{text/zaver.tex}

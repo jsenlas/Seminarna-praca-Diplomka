@@ -1,14 +1,30 @@
-\chapter{Installation of packages}
+\chapter{Installing dependencies}\label{atach:dependencies}
 
 Using a virtual environment is suggested and installing all dependencies in the environment.
 
 \begin{verbatim}
-    pip3 install -r requirements
     python3 -m venv env
     source env/bin/activate
+    pip3 install -r requirements
 \end{verbatim}
 
-\chapter{OptaSense DAS system measurement properties}
+\subsubsection{Optasense visualizer application usage}\label{usage}
+
+\begin{verbatim}
+usage: app.py [-h] [--port PORT]
+
+DAS file visualization software. Server application.
+
+options:
+  -h, --help   show this help message and exit
+  --port PORT  Port number for websocket.
+\end{verbatim}
+
+
+
+
+
+\chapter{OptaSense DAS system measurement properties}\label{attach:properties}
 
 \begin{table}[h]
     \centering
