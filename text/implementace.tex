@@ -1,11 +1,12 @@
-
 \chapter{Implementation of DAS visualization application}\label{txt.implementation}
 
-This chapter provides an implementation overview of the DAS visualization application. Based on the previous chapters we put everything together and create an application for data processing and visualization. The whole application consists of two main parts a Python back-end and a JavaScript front-end. 
+This chapter provides an implementation overview of the DAS visualization application. Based on the previous chapters, we put everything together and created an application for data processing and visualization. The whole application consists of two main parts a Python back end and a JavaScript front end. 
 
 \section{Python back-end application implementation}\label{txt.implementation.python}
 
-Back-end is written in programming language Python3.10. To run the application it is advisable to create virtual environment and install all the dependencies in that environment. Installation steps can be found in Attachments \ref{atach:dependencies}. The application consists of multiple files as can be seen in \ref{dir:filestructure.python}. 
+The back-end is written in the programming language Python3.10\footnote{\url{https://www.python.org/}} was chosen. Python is a~great language for scientific use, data visualization, and graph plotting, which is the goal of this work. The most significant advantage comes from the availability of scientific libraries. 
+
+To run the application, creating a virtual environment and installing all the dependencies in that environment is advisable. Installation steps can be found in Attachments \ref{atach:dependencies}. The application consists of multiple files, as seen in \ref{dir:filestructure.python}. 
 
 \bigskip
 Python back-end file structure:
@@ -29,19 +30,19 @@ Python back-end file structure:
 \bigskip
 
 
-The application is started by calling \verb|python3 app.py --port 8001|. Everything runs inside with use of \textit{asyncio} library. The \textit{app.py} file parses arguments with the use of \textit{argparse} library. Only argument is optional \textit{port} argument, default value is 8001, which is later used by \textit{websocket}. Websocket uses \textit{async for} waiting for messages from the client side. Incoming messages are in the JSON format. Every message has a \textit{type} which determines which message is incoming. Messages are parsed using \textit{MessageParser} class, which implements a \textit{factory object}.
-\textit{Factory} object is one of the most used object oriented design patterns. It creates objects without revealing the logic to the client. The only implemented method is \verb|parse()| which reads the type and then it creates one of the message classes and returns it. Each message corresponds to its own message class. For ease of programming \textit{dataclasses} module was used. It provides functions and a decorator for automatic generation of special methods (\verb|__init__()| or \verb|__repr__()|). There are 6 message dataclasses \textit{InitApp}, \textit{FindFiles}, \textit{OpenFile}, \textit{Streaming}, \textit{Properties} and \textit{ChannelSelection}, see Figure \ref{fig:uml}. When the message parsing fails it raises an \verb|UnknownMessageException|. The exception is thrown away as we do not want to terminate execution every time an incorrect message is received.
+The application is started by calling \verb|python3 app.py --port 8001|. Everything runs inside with the use of \textit{asyncio} library. The \textit{app.py} file parses arguments with the use of \textit{argparse} library. The only argument is the optional \textit{port} argument. The default value is 8001, which is later used by \textit{websocket}. Websocket uses \textit{async for} waiting for messages from the client side. Incoming messages are in JSON format. Every message has a \textit{type} which determines the incoming message. Messages are parsed using \textit{MessageParser} class, which implements a \textit{factory object}.
+\textit{Factory} object is one of the most used object-oriented design patterns. It creates objects without revealing the logic to the client. The only implemented method is \verb|parse()|, which reads the type and then creates one of the message classes and returns it. Each message corresponds to its message class. For ease of programming, \textit{dataclasses} module was used. It provides functions and a decorator for the automatic generation of special methods (\verb|__init__()| or \verb|__repr__()|). There are 6 message dataclasses \textit{InitApp}, \textit{FindFiles}, \textit{OpenFile}, \textit{Streaming}, \textit{Properties} and \textit{ChannelSelection}, see Figure \ref{fig:uml}. When the message parsing fails, it raises an \verb|UnknownMessageException|. The exception is thrown away as we do not want to terminate execution whenever an incorrect message is received.
 
-Message classes and the factory object \verb|MessageFactory| are located in the \textit{message\_classes.py} file with an \textit{Exception} class \verb|UnknownMessageException|.
+Message classes and the factory object \verb|MessageFactory| are in the \textit{message\_classes.py} file with an \textit{Exception} class \verb|UnknownMessageException|.
 
 \begin{figure}
     \centering
-    \includegraphics{obrazky/appstack.drawio.pdf}
+    \includegraphics{pdf/websocketcomm.drawio.pdf}
     \caption{UML diagram of the back-end}
     \label{fig:uml}
 \end{figure}
 
-An example of incoming message from the client, received by the server:
+An example of an incoming message from the client received by the server:
 \begin{verbatim}
 {
     'type': 'path',
@@ -50,32 +51,39 @@ An example of incoming message from the client, received by the server:
 }
 \end{verbatim}
 
-Next the MessageFactory checks the message \verb|type| - \textit{"path"} corresponds to \textit{FindFiles} class and returns it. The message class is than saved as a server state. Each message class then has its own \textit{if} statement with its own behaviour.
+Next, the MessageFactory checks the message \verb|type| - \textit{"path"} corresponds to \textit{FindFiles} class and returns it. The message class is then saved as a server state. Each message class has its own \textit{if} statement with its behavior. Not to be confused, the behavior is defined outside of the class. It is not implemented in the data class itself.
 
 \textit{FindFiles} is the first message sent from the client 
 
-\section{Program implementation of HDF5 to WAV}\label{lab:hdftowav}\label{txt.implementation.wav}
+\subsection{Program implementation of HDF5 to WAV}\label{lab:hdftowav}\label{txt.implementation.wav}
 
-The goal of this part of project is to create an application for reading data from the \ac{das} system and converting the data to the \verb|.wav| audio file format.
+This part of the project aims to create an application for reading data from the \ac{das} system and converting the data to the \verb|.wav| audio file format.
 
-For the implementation of this application, the Python\footnote{\url{https://www.python.org/}} programming language was chosen. Python is a~great language for scientific use, data visualization, and graph plotting, which is the goal. The biggest advantage comes from the availability of scientific libraries. The opening of \verb |.h5| files is done with \verb|h5py| library\footnote{\url{https://www.h5py.org/}}. For working with dataset data types \verb|numpy|\footnote{\url{https://numpy.org/}} library is used. The function for interpolating arrays to a~certain range is also used \verb|interp|. Lastly, to convert the signal data to \verb|.wav| audio format \verb|scipy| library is used specifically \verb|io| module function \verb|wavfile|. To read all options and input arguments, the \verb|argparse| library is used\footnote{\url{https://docs.python.org/3/library/argparse.html}}.
+The opening of \verb |.h5| files is done with \verb|h5py| library\footnote{\url{https://www.h5py.org/}}. For working with dataset data types, \verb|numpy|\footnote{\url{https://numpy.org/}} library is used. The function for interpolating arrays to a~certain range is also used \verb|interp|. Lastly, to convert the signal data to \verb|.wav| audio format \verb|scipy| library is used specifically \verb|io| module function \verb|wavfile|. To read all options and input arguments, the \verb|argparse| library is used\footnote{\url{https://docs.python.org/3/library/argparse.html}}.
+
+\begin{figure}
+    \centering
+    \includegraphics{pdf/websocketcomm.drawio.pdf}
+    \caption{UML diagram of the back-end}
+    \label{fig:uml}
+\end{figure}
 
 \subsection{Reading HDF5 file}\label{txt.implementation.reading}
 
-The sample file recorded in the OptaSense ODH-F is in HDF5 file format. As \ac{hdf} files have a~user-defined structure on the application layer and in the binary form it is hard to say what is actually in the file. To better understand the contents of the \verb|.h5| file, \verb|h5dump| was performed and a conversion to JSON\footnote{\url{https://www.json.org/json-en.html}} was also performed by the \verb|h5tojson| program\footnote{\url{https://hdf5-json.readthedocs.io/en/latest/tools/h5json.html}}. The JSON file is quite large in size - the original HDF5 file is only \qty{52,7}{MB} and the JSON file is \qty{946,6}{MB}. The dump text file is half the size and provides the same information, but the datasets are harder to understand, but the whole file is only half the size of the JSON file at ``only'' \qty{420}{MB}. The JSON format is much easier to read. The structure of the file is divided into 3 parts:
+The sample file recorded in the OptaSense ODH-F is in HDF5 file format. As \ac{hdf} files have a~user-defined structure on the application layer and in the binary form, it is hard to say what is actually in the file. To better understand the contents of the \verb|.h5| file, \verb|h5dump| was performed and a conversion to JSON\footnote{\url{https://www.json.org/json-en.html}} was also performed by the \verb|h5tojson| program\footnote{\url{https://hdf5-json.readthedocs.io/en/latest/tools/h5json.html}}. The JSON file is quite large - the original HDF5 file is only \qty{52,7}{MB}, and the JSON file is \qty{946,6}{MB}. The dump text file is half the size and provides the same information, but the datasets are harder to understand, but the whole file is only half the size of the JSON file at ``only'' \qty{420}{MB}. The JSON format is much easier to read. The structure of the file is divided into three parts:
 
 \begin{itemize}
     \item \textit{apiVersion} - 1.1.1 version of API
-    \item \textit{datasets} - Contain all the datasets organized by their UUID\footnote{Universally unique identifier} that are defined in the groups section. There is also an \textit{alias} that is in the format of a Unix-based system path, for example, \verb|"/Acquisition/Raw[0]/Custom/SampleCount"|. There are also other properties that define the shape and type of stored data. In this case, the properties are shown in the table \ref{tab:file_details}.
+    \item \textit{datasets} - Contain all the datasets organized by their UUID\footnote{Universally unique identifier} that are defined in the groups section. There is also an \textit{alias} that is in the format of a Unix-based system path, for example, \verb|"/Acquisition/Raw[0]/Custom/SampleCount"|. Other properties define the shape and type of stored data. In this case, the properties are shown in the table \ref{tab:file_details}.
     \item \textit{groups} - Groups are named by a UUID. The group object has:
         \begin{itemize}
             \item \textit{alias} - Unix-like name; the first is root ``/'' group
-            \item \textit{attributes} - define the type, name, and shape of the value of the attribute which is a string \verb|979bb2ac-99bf-4cb5-b410-5c16cd7872dc|
-            \item \textit{links} - links to other groups that create a treelike structure. The link object contains the class of a link (e.g. H5L\_TYPE\_HARD for hard link), the \textit{collection} property telling that it is a group and the name of the group. The group object also contains other important metadata, such as measurement settings. All important details are given in the table \ref{tab:file_details}
+            \item \textit{attributes} - define the type, name, and shape of the value of the attribute, which is a string \verb|979bb2ac-99bf-4cb5-b410-5c16cd7872dc|
+            \item \textit{links} - links to other groups that create a treelike structure. The link object contains the class of a link (e.g., H5L\_TYPE\_HARD for hard link), the \textit{collection} property telling that it is a group, and the name of the group. The group object also contains other important metadata, such as measurement settings. All important details are given in the table \ref{tab:file_details}
         \end{itemize}
 \end{itemize}
 
-There is a~library for reading \ac{hdf} files written in Python called \verb|h5py|. To read the contents of the file, a~function was created called \verb|get_dataset_path()| which recursively looks for all groups, according to their name provided by the \verb|.keys()| method, in the dataset. The result of this function is propagated through recursion and saved in Python \verb|set()| built-in type. The user can then choose which one is the right dataset to use because there is probably more than one dataset. The user can save the string and use it as an argument when calling the program. This saves time in searching for the contents of the file. 
+There is a~library for reading \ac{hdf} files written in Python called \verb|h5py|. To read the \ac{hdf} file's contents, a~function was created called \verb|get_dataset_path()|, which recursively looks for all groups according to their name provided by the \verb|.keys()| method, in the dataset. The result of this function is propagated through recursion and saved in Python \verb|set()| built-in type. The user can then choose which one is the suitable dataset to use because there is probably more than one dataset. When calling the program, the user can save the string and use it as an argument. This saves time in searching for the contents of the file.
 
 This is the data structure of the DAS file from the OptaSense Interrogator:
 
@@ -97,19 +105,19 @@ DAS output file structure in \ac{hdf} format
 }
 \bigskip
 
-The type of explanation in \ref{dir:filestructure} is \verb|i8|, which is \verb|numberpy.int64|. \verb|SampleCount| contains numbering of all samples, \verb|RawDataTime| contains time, and \verb|RawData[0]| contains useful sensor data that we need to read in the next steps; see \ref{txt.design.datapprocessing}. More details are provided in Table \ref{tab:file_details}.
+The type of explanation in \ref{dir:filestructure} is \verb|i8|, which is \verb|numberpy.int64|. \verb|SampleCount| contains numbering of all samples, \verb|RawDataTime| contains time, and \verb|RawData[0]| contains sensor data we need to read in the following steps; see \ref{txt.design.datapprocessing}. More details are provided in Table \ref{tab:file_details}.
 
-All important HDF5 attributes are shown in the table \ref{tab:file_details}, it contains metadata information about the datasets, data dimensions, number of channels, kinds of filters used, time information, length of pulses, laser wavelength, and more. Some properties can be derived from those in the table. The capture duration can be calculated from the start and end of the capture, which is \qty{10,376}{\second}.
+All important HDF5 attributes are shown in the table \ref{tab:file_details}. It contains metadata about the datasets, data dimensions, number of channels, kinds of filters used, time information, length of pulses, laser wavelength, and more. Some properties can be derived from those in the table. The capture duration can be calculated from the start and end of the capture, which is \qty{10,376}{\second}.
 
 \subsection{Data processing for converting raw HDF5 data to WAV}\label{txt.implementation.processing}
 
-The useful data have 100 channels with \textit{N} samples, in this example \qty{332032}{samples} saved in \verb|/Acquisition/Raw[0]/RawData[0]|, see the file structure in \ref{dir:filestructure}. The function \verb|scipy.io.wavfile.write()| is used to save samples to a file and the data need some more processing before the function can be called. After the data are read from the file, it is saved into \verb|samples| variable of type \verb|numpy.array| it is then processed in 4 steps as preparation for saving into \verb|.wav| file. The steps are:
+The data have 100 channels with \textit{N} samples, in this example \qty{332032}{samples} saved in \verb|/Acquisition/Raw[0]/RawData[0]|, see the file structure in \ref{dir:filestructure}. The function \verb|scipy.io.wavfile.write()| saves samples to a file, and the data need more processing before the function can be called. After the data are read from the file, it is saved into \verb|samples| variable of type \verb|numpy.array| it is then processed in 4 steps as preparation for saving into \verb|.wav| file. The steps are:
 
 \begin{enumerate}
     \item \textbf{Channel selection} - only channel one can be selected.
-    \item \textbf{Data interpolation} - The original data have a bad value range from -24838 to -30758, triggering an exception when writing the data into a \verb|.wav| file. The \verb|numpy.interp()|\footnote{\url{https://numpy.org/doc/stable/reference/generated/numpy.interp.html}} function interpolates the data into the range of the maximum and minimum values specified in this case by the \qty{16}{bit} PCM\footnote{Pulse Code Modulation}, which can be written to WAV file by \verb|wavfile| module.
+    \item \textbf{Data interpolation} - The original data have a terrible value range from -24838 to -30758, triggering an exception when writing the data into a \verb|.wav| file. The \verb|numpy.interp()|\footnote{\url{https://numpy.org/doc/stable/reference/generated/numpy.interp.html}} function interpolates the data into the range of the maximum and minimum values specified in this case by the \qty{16}{bit} PCM\footnote{Pulse Code Modulation}, which can be written to WAV file by \verb|wavfile| module.
     \item \textbf{Resampling} - as the data are recorded at a certain sampling frequency, in this case, \qty{10}{\kHz}, resampling by the function \verb|scipy.signal.resample() |\footnote{\url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.resample.html}} is necessary. The right number of samples is calculated by the formula \ref{formula:sampling}.
-    \item \textbf{Retyping} - the resampled data need to be in the correct format and since the interpolation was done in the range of \verb|int16| the output type of choice is the same \verb|samples.astype(np.int16)|.
+    \item \textbf{Retyping} - the resampled data need to be in the correct format, and since the interpolation was done in the range of \verb|int16|, the output type of choice is the same \verb|samples.astype(np.int16)|.
 \end{enumerate}
 
 \begin{equation}
@@ -138,7 +146,7 @@ The useful data have 100 channels with \textit{N} samples, in this example \qty{
 
 
 
-\section{Svelte}\label{txt.implementation.svelte}
+\section{Frontend client application}\label{txt.implementation.svelte}
 \subsection{Svelte components}\label{txt.implementation.components}
 \subsection{Svelte stores}\label{txt.implementation.stores}
 
