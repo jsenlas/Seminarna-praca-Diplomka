@@ -105,6 +105,8 @@
     {Ž}{{\v{Z}}}1
 }
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%      Definice informací o dokumentu             %%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,7 +157,7 @@
    
 %% Vložení zadání
 \includepdf[pages=1]%   buďto generovaného informačním systémem
-  {pdf/zadani.pdf}% název souboru nesmí obsahovat mezery!
+  {pdf/zadanie.pdf}% název souboru nesmí obsahovat mezery!
 %% NEBO lze vytvořit prázdný list příkazem ze šablony
 %\patternpage{}%
 %	{\sffamily\Huge\centering ZDE VLOŽIT LIST ZADÁNÍ}%
@@ -193,7 +195,9 @@
 
 %%% Vysázení seznamu výpisů kódu
 % (vynechejte, pokud máte dva nebo méně výpisů)
-\lstlistoflistings
+% \lstlistoflistings
+% \usepackage{color}
+\include{lst-python}
 
 \cleardoublepage\pagestyle{plain}   % zapnutí číslování stránek
 

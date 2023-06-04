@@ -11,9 +11,9 @@
   english-slovak,	% originální jazyk je angličtina, překlad je slovensky
 %
 %%% Z následujících voleb typu práce lze použít pouze jednu
-  semestral,		  % semestrální práce (nesází se abstrakty, prohlášení, poděkování) (výchozí)
+  % semestral,		  % semestrální práce (nesází se abstrakty, prohlášení, poděkování) (výchozí)
   %bachelor,			%	bakalářská práce
-  %master,			  % diplomová práce
+  master,			  % diplomová práce
   %treatise,			% pojednání o disertační práci
   %doctoral,			% disertační práce
 %
@@ -48,7 +48,7 @@
 % v případě, že nechcete, aby se na titulním snímku prezentace zobrazoval oponent, pouze příkaz zakomentujte;
 % u obhajoby semestrální práce se oponent nezobrazuje (jelikož neexistuje)
 % U dizertační práce jsou typicky dva až tři oponenti. Pokud je chcete mít na titulním slajdu, prosím ručně odkomentujte a upravte jejich jména v definici "VUT title page" v souboru thesis.sty.
-\opponent[doc.\ Ing.]{Jan}{Hajný}[Ph.D.]
+\opponent[Ing.]{Petr}{Dejdar}
 
 %%% Název práce
 %  Parametr ve složených závorkách {} je název v originálním jazyce,
@@ -101,7 +101,7 @@
 \academicyear{2022/23}
 
 %%% Datum obhajoby (uplatní se pouze v prezentaci k obhajobě)
-\date{11.\,12.\,2022} 
+\date{05.\,06.\,2023} 
 
 %%% Místo obhajoby
 % Na titulních stránkách bude automaticky vysázeno VELKÝMI písmeny (pokud tyto stránky sází šablona)
@@ -109,21 +109,18 @@
 
 %%% Abstrakt
 \abstract[%
-Překlad abstraktu
-(v~angličtině, pokud je originálním jazykem čeština či slovenština; v~češtině či slovenštině, pokud je originálním jazykem angličtina)
+Táto práca sa zameriava na snímanie optických vlákien pomocou distribuovaného akustického snímania. Cieľom bolo vytvoriť multiplatformovú aplikáciu na vizualizáciu údajov získaných zariadení Optasense ODH-F. Táto práca bola motivovaná nedostatkom aplikácií s otvoreným zdrojovým kódom na vizualizáciu dát získaných pri snímaní pomocou optických vlákien. Práca vysvetľuje distribuované akustické snímanie a~efekty rozptylu svetla, ako je Rayleighov, Ramanov a~Mandelsamov-Brillouinov rozptyl. Výsledkom práce je webová aplikácia. Aplikácia sa skladá z dvoch hlavných častí - server napísaný v~jazyku Python a~klientskej časti implementovanej vo frameworku Svelte. Výsledky tejto práce možno použiť ako základ pre vytvorenie vizualizačného softvéru pre distribuované akustické snímanie.
 ]{%
-Abstrakt práce v~originálním jazyce
+This work focuses on fiber optic sensing using distributed acoustic sensing. The goal was to create a~multiplatform application for data visualization obtained by an Optasense ODH-F interrogator. This work was motivated by the lack of open-source visualization software for fiber optic sensing. Distributed acoustic sensing was explained with light scattering effects such as Rayleigh, Raman, and Mandelsam-Brillouin scattering. A~web application was implemented. There are two parts, back-end was written in Python, and the frontend was written using the Svelte framework. The results of this work can be used as a~basis for creating visualization software for distributed acoustic sensing.
 }
-
 %%% Klíčová slova
 \keywrds[%
-Překlad klíčových slov
-(v~angličtině, pokud je originálním jazykem čeština či slovenština; v~češtině či slovenštině, pokud je originálním jazykem angličtina)
+optické vlákna, distribuované akustické snímanie, optická reflektometria v~časovej oblasti, meranie vibrácií, vizualizačný softvér, webová aplikácia, Svelte framework
 ]{%
-Klíčová slova v~originálním jazyce
+fiber optics, distributed acoustic sensing, optical time domain reflectometry, strain and vibration measurement, visualization software, web application, Svelte framework
 }
 
 %%% Poděkování
 \acknowledgement{%
-I would like to thank my supervisor Ing.~Adrián Tomášov for leading me during my struggles with this work, for his time during our consultations and lots of patience. 
+I want to thank my supervisor Ing.~Adrián Tomášov for leading me during my struggles with this work, for his time during our consultations, and for lots of patience. 
 }%

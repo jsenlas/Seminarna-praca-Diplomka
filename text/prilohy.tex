@@ -8,7 +8,17 @@ Using a virtual environment is suggested and installing all dependencies in the 
     pip3 install -r requirements
 \end{verbatim}
 
-\subsubsection{Optasense visualizer application usage}\label{usage}
+\section{Optasense visualizer application usage}\label{usage}
+
+To run the application it is necessary to have an environment set up and all dependencies installed.
+\textit{} \newline
+Run the server part of the application:
+\begin{verbatim}
+    python3 app.py
+\end{verbatim}
+
+\textit{} \newline
+The application usage:
 
 \begin{verbatim}
 usage: app.py [-h] [--port PORT]
@@ -21,10 +31,35 @@ options:
 \end{verbatim}
 
 
+\section{Svelte}\label{attach:svelte}
+\textit{} \newline
+To create a Svelte application from template:
 
+\begin{verbatim}
+    npm create svelte@latest myapp
+\end{verbatim}
 
+Run the client on the localhost:
 
-\chapter{OptaSense DAS system measurement properties}\label{attach:properties}
+\begin{verbatim}
+    npm run dev
+\end{verbatim}
+
+To run a build call:
+
+\begin{verbatim}
+    npm run build
+\end{verbatim}
+
+The output will be saved in \textit{/dist} folder. To run the application from there, run Python script in the project's client folder:
+
+\begin{verbatim}
+    python3 server.py
+\end{verbatim}
+
+Server created this way is a simple Flask server.
+
+\chapter{OptaSense DAS system measurement\newline properties}\label{attach:properties}
 
 \begin{table}[h]
     \centering
@@ -59,12 +94,13 @@ options:
         StartLocusIndex & 600  \\ \hline
 
     \end{tabular}
-    \caption{HDF5 groups and their attributes from the data file}
+    \caption{HDF5 groups and their attributes from the data file.}
     \label{tab:file_details}
 \end{table}
 \begin{table}[]
     \centering
     \begin{tabular}{|c|c|}
+    \hline
     \textbf{Property} & \textbf{Value} \\ \hline
         
     \multicolumn{2}{|c|}{\textbf{/Acquisition/Raw[0]/Custom/SampleCount}} \\ \hline
@@ -89,11 +125,82 @@ options:
         type & \makecell{64-bit integer} \\
     \hline
     \end{tabular}
-    \caption{HDF5 groups and their attributes from the data file}
-    \label{tab:file_details}
+    \caption{HDF5 groups and their attributes from the data file.}
+    \label{tab:file_details1}
 \end{table}
 
 
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Property} & \textbf{Value} \\ \hline
+        
+    \multicolumn{2}{|c|}{\textbf{/Acquisition}} \\ \hline
+		MaximumFrequency & 10000.0 \\ \hline
+		MinimumFrequency & 0.0 \\ \hline
+		NumberOfLoci & 1700 \\ \hline
+		PulseRate & 20000.0 \\ \hline
+		PulseWidth & 20.0 \\ \hline
+		PulseWidthUnit & ns \\ \hline
+		SpatialSamplingInterval & 1.0209523 \\ \hline
+		SpatialSamplingIntervalUnit & m \\ \hline
+		StartLocusIndex & 0 \\ \hline
+		TriggeredMeasurement & false \\ \hline
+		VendorCode & \makecell{OptaSense IU Setup 1.8.6 \\ c9c23ad2ab20eb82641984e0e1205500228e9fba} \\ \hline
+		schemaVersion & 2.0 \\ \hline
+		uuid & bb17e24c-0c96-44d0-b4b0-a25a72db10e2 \\ \hline
+        Filters & shuffle and deflate \\ \hline
+        maximum dimensions & 6451612 \\ \hline
+        shape (number of samples) & 332032 \\ \hline
+        type & \makecell{64-bit integer} \\ \hline
+    \multicolumn{2}{|c|}{\textbf{/Acquisition/Raw[0]}} \\ \hline
+        \makecell{Count \\ number of all values} & 33203200 \\ \hline
+		% Custom & <HDF5 group "/Acquisition/Raw[0]/Custom" (4 members)> \\ \hline
+		% RawData & <HDF5 dataset "RawData": shape (1140000, 1700), type "<i2"> \\ \hline
+		% RawDataTime & <HDF5 dataset "RawDataTime": shape (1140000,), type "<i8"> \\ \hline
+		NumberOfLoci & 1700 \\ \hline
+		OutputDataRate & 20000.0 \\ \hline
+		RawDescription & b'Single Pulse, SR: 1.5, OCP: 1' \\ \hline
+		StartLocusIndex & 0 \\ \hline
+		uuid & b'34baa19e-cdde-48d7-8430-fbc9eb2187e6' \\ \hline
+    \multicolumn{2}{|c|}{\textbf{/Acquisition/Raw[0]/RawData}} \\ \hline
+		Count & 1938000000  \\ \hline
+		Dimensions & array([time, locus], dtype='|S6')  \\ \hline
+		PartEndTime & 2023-04-17T11:25:10.456750Z  \\ \hline
+		PartStartTime & 2023-04-17T11:24:13.456800Z  \\ \hline
+		StartIndex & 0  \\ \hline
+    \hline
+    \end{tabular}
+    \caption{HDF5 groups and their attributes from the running data file.}
+    \label{tab:filerunning}
+\end{table}
+
+\chapter{Printing the HDF5 data structure and metadata}
+
+\begin{verbatim}
+    h5dump -n running_2023-04-17T122413+0100.h5
+
+    HDF5 "running_2023-04-17T122413+0100.h5" {
+        FILE_CONTENTS {
+         group      /
+         group      /Acquisition
+         group      /Acquisition/Custom
+         group      /Acquisition/Raw[0]
+         group      /Acquisition/Raw[0]/Custom
+         dataset    /Acquisition/Raw[0]/Custom/GpBits
+         dataset    /Acquisition/Raw[0]/Custom/GpsStatus
+         dataset    /Acquisition/Raw[0]/Custom/PpsOffset
+         dataset    /Acquisition/Raw[0]/Custom/SampleCount
+         dataset    /Acquisition/Raw[0]/RawData
+         dataset    /Acquisition/Raw[0]/RawDataTime
+      }
+    }
+
+
+    
+\end{verbatim}
 
 
 

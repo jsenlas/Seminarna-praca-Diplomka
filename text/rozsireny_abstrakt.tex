@@ -1,14 +1,39 @@
-% Vysázení stránky s rozšířeným abstraktem
-% (týká se pouze bc. a dp. prací psaných v angličtině, viz Směrnice rektora 72/2017)
+% Vysázení stránky s~rozšířeným abstraktem
+% (týká se pouze bc. a~dp. prací psaných v~angličtině, viz Směrnice rektora 72/2017)
 \cleardoublepage
 \noindent
-{\large\sffamily\bfseries\MakeUppercase{Rozšířený abstrakt}}
-\\
-Výtah ze směrnice rektora 72/2017:\\
-\emph{Bakalářská a diplomová práce předložená v angličtině musí obsahovat rozšířený abstrakt v češtině
-nebo slovenštině (čl. 15). To se netýká studentů, kteří studují studijní program akreditovaný v
-angličtině.}
-(čl. 3, par. 7)\\
-\emph{Nebude-li vnitřní normou stanoveno jinak, doporučuje se rozšířený abstrakt o rozsahu přibližně 3
-normostrany, který bude obsahovat úvod, popis řešení a shrnutí a zhodnocení výsledků.}
-(čl. 15, par. 5)
+{\large\sffamily\bfseries\MakeUppercase{Rozšírený abstrakt}}
+
+Optické vlákna sa v~dnešnej dobe používajú hlavne na prenos informácií a~to medzi datacentrami alebo až k nám domov. Spolu s~vývojom optických vlákien a~laserových diód začínajú vznikať aj ďalšie odvetvia. Vzniká optická reflektometria a~jej rôzne metódy ako OTDR (optická reflektometria v~časovej oblasti) a~OFDR (optická reflektometria vo frekvenčnej oblasti). Tie sa používajú na meranie rôznych defektov vlákien - praskliny, zlomy, pretrhnutia a~zvary. Meranie funguje na princípe vyslania svetelného pulzu do optického vlákna a~pri prechode vláknom sa svetlo rôzne láme a~odráža od centier rozptylu (z angl. scattering center). Centrá rozptylu môžu byť rôzne nečistoty, nerovnomernosti vo vlákne ako aj samotné molekuly a~atómy materiálu, z~ktorého je vlákno vyrobené.
+
+Podľa toho, od akých centier rozptylu sa svetlo odráža, rozlišujeme rôzne efekty odrazu svetla. Mie efekt je spôsobený odrazom od nečistôt vo vlákne väčších ako je vlnová dĺžka signálu z~laserovej diódy. Rayleighov odraz je zase spôsobený odrazmi od atómov a~molekúl a~všeobecne od centier menších než je vlnová dĺžka svetelného paprsku. Ramanov odraz je odrazom od kryštalickej mriežky materiálu, z~ktorého je materiál vyrobený. Mandelsam-Brillouinov odraz je odraz od vibrácií atómov a~molekúl v~materiáli. 
+
+Distribuované akustické snímanie \textit{DAS} (z anglického Distributed Acoustic Sensing) umožňuje využiť tieto odrazy na merania rôznych externých veličín. Zaujímavosťou je, že tieto merania sa môžu vykonávať distribuovane. To znamená, že na viacerých miestach na celej dĺžke vlákna dochádza k meraniam. Toho sa dosiahne meraním časového rozdielu medzi vyslaním svetelného pulzu do vlákna a~časom, keď svetelný odraz dorazí do fotodetektora. Merajú sa rôzne zmeny vo vlastnostiach vyslaného svetelného pulzu, ako zvýšená alebo znížená vlnová dĺžka, útlm výkonu amplitúdy a~zmeny vo fáze odrazeného signálu oproti signálu vyslaného. Základnou vlastnosťou na to aby mohol byť odrazový efekt použitý pre distribuované snímanie je rovnomerné rozloženie odrazových centier po celej dĺžke vlákna.
+
+Rôzne odrazové efekty sa používajú na rôzne účely. Napríklad na meranie okolitej teploty sa hodí najlepšie Mandelsam-Brillouinov odraz, pretože vzniká pri odrazoch od vibrujúcich atómov. Vo všeobecnosti DAS systémy nachádzajú použitie v~detekcii vibrácií, ťahu a~detekcii pohybu. Napríklad v~optických gyroskopoch a~akcelerometroch, kde ich najväčšou výhodou je vysoká presnosť a~minimálny drift. Aktívne sa používajú v~detekcii a~lokalizácii zemetrasení, ochrane perimetru, aktívnom monitorovaní budov, stavieb a~mostov. Ďalšie zaujímavé využitia sú v~biosenzoroch a~v~chémii pri zisťovaní rôznych vlastností chemikálií. Výhodou optických vlákien je ich vysoká odolnosť voči nepriaznivým externým javom a~nízka ovplyvniteľnosť elektromagnetickým šumom. To z~nich robí ideálne médium pre nebezpečné prostredia, ako sú vysokorádioaktívne prostredia, nebezpečné chemi- kálie a~vysoké napätia. Ďalšou výhodou je malý rozmer optického vlákna. Preto sa využívajú ako súčasť monitorovania vrtov v~ropnom priemysle. Možnosti použitia tejto technológie sú naozaj široké.
+
+Zariadenie schopné merať signál v~optických vláknach sa nazýva DAS interrogator. Asi najbližší preklad do slovenčiny je ``vyšetrovateľ''. Tento názov sa veľmi nehodí preto budeme ďalej používať \textit{DAS systém} alebo len zariadenie. V~našom prípade boli merania vykonávané na zariadení OptaSense ODH-F. Zariadenie sa pripojí na optické vlákno z~jednej strany. Použité optické vlákno môže byť buď špeciálne vlákno určené na merania alebo už existujúca optická infraštruktúra. Zariadenie umožňuje rôzne nastavenia merania, vzorkovacie frekvencie, nastavenie svetelného pulzu, nastavenia GPS lokácie a~ďalšie. 
+
+Výstupom meraní je súbor vo formáte HDF5 (\textit{Hierarchical Data Format v5}), ktorý umožňuje ukladať dáta v~podobe podobnej Linuxovému súborovému systému. HDF5 súbor je založený na modele HDF5, ktorý definuje základné súčasti súboru a~jeho štruktúry, ale samotná štruktúra a~rozloženie stanovuje systém alebo vývojár. Tieto dáta zo zariadenia je možné v~reálnom čase zobrazovať pomocou aplikácie OptaSense OS6. Aplikácia umožňuje zobrazovať horný pohľad na sledovanú oblasť a~udalosti, ktoré sa detekujú na jednotlivých miestach okolo vlákna.
+
+Cieľom tejto práce bolo vytvoriť aplikáciu na zobrazovanie dát z~DAS systému, ktorá bude multiplatformná, keďže jediný softvér na zobrazovanie dát z~tohoto systému je proprietárny a~nie je možné ho upravovať. Z tohto dôvodu sme vybrali dizajn aplikácie ako webovú aplikáciu. Aplikáciu sme rozdelili na dve hlavné časti a~to na klienta, ktorý bude spustený v~prehliadači a~serverovú časť, ktorá posiela dáta do klientskej časti.
+
+Klientská časť aplikácie je postavená na frameworku Svelte, ktorý kompiluje celý projekt do čistého JavaScriptu. Pre porovnanie, frameworky ako React a~Vue pracujú s~virtuálnou reprezentáciou webových objektov, zatiaľ čo Svelte všetky komponenty kompiluje do jedného súboru, ktorý potom vykonáva aktualizácie webovej aplikácie. Týmto spôsobom sa obetuje kompilačný čas za čas pri behu aplikácie. Výsledkom je teda rýchla aplikácia s~vysokou reaktivitou. Svelte aplikácie sú takto oveľa rýchlejšie oproti konkurencii. Svelte framework tiež umožňuje pomerne rýchlu implementáciu a~nezaťažuje vývojára so zložitými konceptami aktualizácie elementov.
+
+Vizualizácia dát je implementovaná ako tepelná mapa (z anglického heatmap), ktorá sa vykresľuje do Canvas elementu. Hodnoty sú reprezentované v~tepelnej mape pomocou farieb. Farby združujeme do farebných máp podľa toho, ako sa menia hodnoty s~farbou. Poznáme štyri základné druhy farebných máp. \textit{Sekvenčné} sú buď jednofarebné alebo viacfarebné, pri tomto type zmeny v~saturácii alebo svetlosti farby reprezentujú zmeny hodnôt a~používajú sa napríklad pri radení. \textit{Rozchádzajúce sa} mapy obyčajne začínajú v~strede jednou farbou a~do minima a~maxima sa rozchádzajú dve rôzne farby. Používajú sa, ak sú hodnoty okolo jednej strednej hodnoty. \textit{Cyklické} mapy začínajú a~končia v~rovnakej farbe. Posledným typom sú \textit{kvalitatívne} farebné mapy, ktoré zobrazujú rôzne farby a~zobrazujú informácie bez jednoznačného poradia. Užívateľ má možnosť si vybrať farebnú mapu podľa svojej subjektívnej preferencie.
+
+Webová aplikácia umožňuje vybrať dátový súbor otvoriť ho a~prehrávať dáta z~neho, tak ako boli zaznamenané DAS systémom. Umožňuje tiež pozastaviť prehrávanie a~znova ho spustiť, nastavovať rýchlosť prehrávania a~exportovať zobrazené dáta do formátu PNG. 
+
+Na komunikáciu klient-server sme navrhli jednoduchý protokol. Komunikácia prebieha pomocou WebSocketov tak, že si klient so serverom vymieňajú bezstavové informácie. 
+
+Serverová časť aplikácie zabezpečuje čítanie a~spracovanie súborov. A po tom, čo si užívateľ zvolí súbor, ktorý chce zobrazovať v~klientskej časti, sa súbor načíta a~to tak, aby príliš nezaťažoval operačnú pamäť počítača. Spustí sa predspracovanie dát, pretože nespracované dáta by nezobrazovali informácie pochopiteľným spôsobom a~navyše by ich bolo príliš veľa. Predspracovanie vytiahne potrebné informácie z~datasetu a~tie sa následne uložia do \textit{numpy} súboru, ktorý má už aj prijateľnú veľkosť aj vhodné dáta. Tento súbor sa potom číta a~posiela do klientskej časti aplikácie, kde sa dáta zobrazujú. 
+
+Výsledkom práce je teda webová aplikácia na vizualizáciu dát zo systému DAS na kontrolu perimetru. Aplikáciu sme otestovali na dátach, ktoré sme zaznamenali pri behaní po chodníku neďaleko zakopaného optického vlákna v~perimetri neďaleko školy. Dáta boli nahrané so vzorkovacou frekvenciou \qty{20}{kHz}. Dáta sme spracovali a~zobrazili v~nami implementovanej aplikácii.
+
+Pri tom, ako som robil na tejto práci, som sa naučil ako funguje systém DAS, rôzne optické javy, ktoré nastávajú pri odraze svetla v~optických vláknach a~naštudoval si rôzne použitia tejto technológie v~praxi. Pri implementovaní webovej aplikácie som sa naučil framework Svelte a~programovať v~jazyku JavaScript. Pri implementácii serverovej časti som sa zase naučil používať moduly a~knižnice pre dizajn asynchrónnej aplikácie, komunikácie pomocou WebSocketov, používať objekty typu generátor a~prácu s~HDF5 súbormi.
+
+Táto práca môže slúžiť ako vzor pri implementácii vizualizácií nad dátami z~DAS sytémov. Je tiež základom pre prácu s~dátami z~DAS systému a~práci s~HDF5 súbormi. Ďalšia práca na tejto aplikácii bude zahŕňať zlepšovanie vizualizačného algoritmu a~pridávanie ďalších funkcionalít, ako je zoom, výber dát a~zvýrazňovanie udalostí. Nad dátami tiež môže bežať aj analýza pomocou umelej inteligencie, ktorá môže kategorizovať udalosti, ktoré sa stali pozdĺž optického vlákna.
+
+
+
+

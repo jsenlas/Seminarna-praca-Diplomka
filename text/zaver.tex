@@ -2,22 +2,28 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Conclusion}
 
-The main goal of this work was to study the DAS system and its output files int he HDF5 file format. As for the implementation part the goal was to create an application capable of converting the data into an audio file. Last goal was to discuss the possibilities of creating a real-time application for data analysis. 
+The main goal of this work was to study the~DAS system and its output files in~the~HDF5 file format. As for the~implementation part, the~goal was to create a~multi-platform application capable of displaying the~data from the~DAS interrogator, processing it, and displaying it in a~suitable form. The visualization should be able to play and pause the~animation of the~flowing data, also with the~ability to convert the~data into an audio file.  
 
-In the theoretical part the principles of optical reflectometry were explained as well as different types of light scattering in the optical wire. The inner workings of the DAS system and methods like \ac{generalotdr} and \ac{otdr} were also studied. The output file format HDF5 was carefully examined with its objects such as Datasets, Groups, Attributes and Links. The output file structure of the DAS system OptaSense ODH-F was shown in a readable form form. 
+In the~theoretical part, the~principles of optical reflectometry were explained, as well as different types of light scattering - Mie scattering, Rayleigh scattering, Raman scattering, and Brillouin scattering. the~inner workings of the~DAS system and methods like \ac{generalotdr} and \ac{otdr} were also studied. The output file format HDF5 was carefully examined with objects such as Datasets, Groups, Attributes, and Links. The output file structure of the~DAS system OptaSense ODH-F was shown in a~readable form. The existing technology was studied with available software for the~front-end and server side. Real-time capabilities were also discussed with the~data bandwidth requirements. A~prototype was created and written in~Svelte to showcase the~application's design with a~waterfall graph and HTML elements to set properties for display. 
 
-An application was created in Python programming language. The application reads the HDF5 data using the h5py Python library. The data was then processed in a few steps - the data was interpolated into the right range, resampled and retyped for the write function from the SciPy library. 
+In the~design section, we discuss software requirements and the~basic back-end technologies used later in the~implementation section, such as WebSockets and reading HDF5 files. The front-end technologies for data visualization based on Canvas and SVG graphics were discussed. The basics of the~Svelte framework were introduced.
 
-In the last section the software design of a real-time application for the DAS system was discussed. The existing technology was studied with available software for front-end and server side. Real-time capabilities were also discussed with the data bandwidth requirements. A prototype was created written in Svelte to showcase the design of the application with waterfall graph and HTML elements to set properties for display. 
+A web application was created with a~server written in Python and a~client using the~Svelte framework. The back end can read and process the~data in HDF5 file format. The back-end communicates with the~client side using WebSockets. A~simple message system was created for this purpose. The client allows the~user to choose the~file and the~dataset, as well as properties like speed choosing a~colormap and channels to display. The visualization can be started, stopped, and replayed. There is also a~feature to download the~image currently on display.
 
-This work can be used as basis for later use as a resource for creating an application for data visualization in the browser. The next step is to create fully functional web application - with its server-side written in Python sending data using WebSockets to the front-end client application written in Svelte.
+% In the~last section the~software design of a~real-time application for the~DAS system was discussed. 
+
+
+% The work can be used as a~resource for creating an application for data visualization in the~browser. The next step is to create fully functional web application - with its server-side written in Python sending data using WebSockets to the~front-end client application written in Svelte.
+
+The application in this state is a~one-page website; the~next step would be to incorporate it into the~SvelteKit framework, allowing page routing. This should be pretty straightforward. Future work can include further improving the~visualization, including zooming and data selection features, either by creating custom \texttt{<canvas>} rendering, SVG rendering with D3js, or using existing libraries such as Plotly. It~might be useful to have multiple algorithms to choose from when processing the~raw DAS data. Although we tried a~few methods for data processing, we have chosen one, and there is no selection possible at this stage.
+
 
 
 
 
 % \section{}
 
-% The semestral part of the thesis studies DAS principles
+% The semestral part of the~thesis studies DAS principles
 
 % and the output format of the deployed system, 
 
